@@ -5,7 +5,7 @@ export default async function Page() {
   type Item = {
     id: number;
     title: string;
-    category: number;
+    category: string;
     salary: number;
   };
   const { data, error } = await supabase
