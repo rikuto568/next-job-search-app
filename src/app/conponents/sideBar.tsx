@@ -39,7 +39,7 @@ export default function Sidebar({
       style={{ padding: 12, borderRight: "1px solid #eee", minWidth: 200 }}
     >
       <div>
-        <strong>カテゴリ</strong>
+        <strong>求人カテゴリ</strong>
         {CATEGORIES.map((c) => (
           <label key={c} style={{ display: "block" }}>
             <input
@@ -51,18 +51,16 @@ export default function Sidebar({
           </label>
         ))}
       </div>
-
       <div style={{ marginTop: 12 }}>
         <label>
-          <strong>最低年収（万円）</strong>
+          <strong>年収</strong>
           <div>
             <select value={min} onChange={(e) => setMin(e.target.value)}>
-              <option value="300">300</option>
-              <option value="400">400</option>
-              <option value="500">500</option>
-              <option value="600">600</option>
-              <option value="700">700</option>
-              <option value="800">800</option>
+              <option value="300">300万円以上▼</option>
+              <option value="400">400万円以上</option>
+              <option value="500">500万円以上</option>
+              <option value="600">600万円以上</option>
+              <option value="700">700万円以上</option>
             </select>
           </div>
         </label>

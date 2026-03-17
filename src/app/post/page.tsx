@@ -44,14 +44,9 @@ export default function PostPage() {
       <h1>求人投稿</h1>
       <form action={handleSubmit}>
         <label>
-          タイトル
-          <input type="text" name="title" required />
-        </label>
-
-        <label>
-          カテゴリ
+          求人カテゴリ選択
           <select name="category" required defaultValue="">
-            <option value="">選択してください</option>
+            <option value="">カテゴリを選択</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
@@ -60,8 +55,12 @@ export default function PostPage() {
           </select>
         </label>
         <label>
-          年収
+          年収（万円）
           <input type="number" name="salary" required />
+        </label>
+        <label>
+          求人タイトル
+          <input type="text" name="title" required />
         </label>
         <button type="submit">投稿</button>
       </form>
