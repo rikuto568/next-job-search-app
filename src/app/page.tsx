@@ -54,39 +54,71 @@ export default async function Page({
     return "/?" + q.toString();
   };
   return (
-    <div>
-      <h1>求人検索アプリ</h1>
-      <Link href="/">求人検索</Link>
-      <Link href="/post">求人投稿</Link>
-      <Sidebar initial={{ category: categoryParam, min: minParam }} />
-      <h2>求人一覧</h2>
-      <h2>該当件数:{total}件</h2>
-      {data?.map((post) => (
-        <div key={post.id}>
-          <p>{post.title}</p>
-          <p>カテゴリ：{post.category}</p>
-          <p>年収：{post.salary}万円</p>
-        </div>
-      ))}
-      <nav style={{ marginTop: 16 }}>
-        {pageNum > 1 && <Link href={buildHref(pageNum - 1)}>◀</Link>}{" "}
-        {[...Array(totalPages)].map((_, i) => {
-          const p = i + 1;
-          return (
-            <Link
-              key={p}
-              href={buildHref(p)}
-              style={{
-                margin: "0 6px",
-                fontWeight: p === pageNum ? "bold" : "normal",
-              }}
-            >
-              {p}
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      <header className="bg-slate-800 text-white">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <h1 className="text-lg font-semibold">求人検索アプリ</h1>
+          <nav className="items-center space-x-4">
+            <Link href="/" className="text-sm hover:underline">
+              求人検索
             </Link>
-          );
-        })}{" "}
-        {pageNum < totalPages && <Link href={buildHref(pageNum + 1)}>▶</Link>}
-      </nav>
+            <Link href="/post" className="text-sm hover:underline">
+              求人投稿
+            </Link>
+          </nav>
+        </div>
+      </header>
+      <main style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
+        <Sidebar initial={{ category: categoryParam, min: minParam }} />
+        <section className="p-6 flex-1 flex flex-col">
+          <h2 className="text-xl font-bold">求人一覧</h2>
+          <h2 className="text-xs">該当件数:{total}件</h2>
+          <div className="mt-4 grid gap-4">
+            {data?.map((post) => (
+              <div
+                key={post.id}
+                className="w-full border border-gray-200 rounded-md bg-white p-4 hover:shadow-md transition-shadow duration-150 cursor-pointer focus-within:ring-2 focus-within:ring-slate-200"
+              >
+                <h3 className="font-semibold text-sm text-gray-900 mb-1">
+                  {post.title}
+                </h3>
+                <p className="text-xs text-gray-600">カテゴリ：{post.category}</p>
+                <p className="text-xs text-gray-600">年収：{post.salary}万円</p>
+              </div>
+            ))}
+          </div>
+          <nav className="flex items-center justify-center gap-0 mt-auto pt-4">
+            {pageNum > 1 && (
+              <Link
+                href={buildHref(pageNum - 1)}
+                className="px-0.5 py-0.5 rounded disabled:opacity-50 hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 transition-colors"
+              >
+                ◀
+              </Link>
+            )}{" "}
+            {[...Array(totalPages)].map((_, i) => {
+              const p = i + 1;
+              return (
+                <Link
+                  key={p}
+                  href={buildHref(p)}
+                  className={`mx-0 px-0.5 py-0.5 rounded ${p === pageNum ? "font-bold" : "font-normal"}`}
+                >
+                  {p}
+                </Link>
+              );
+            })}{" "}
+            {pageNum < totalPages && (
+              <Link
+                href={buildHref(pageNum + 1)}
+                className="px-0.5 py-0.5 rounded disabled:opacity-50 hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 transition-colors"
+              >
+                ▶
+              </Link>
+            )}
+          </nav>
+        </section>
+      </main>
     </div>
   );
 }

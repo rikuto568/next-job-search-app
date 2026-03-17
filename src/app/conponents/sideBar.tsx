@@ -35,36 +35,37 @@ export default function Sidebar({
   }, [selected, min, router]);
 
   return (
-    <aside
-      style={{ padding: 12, borderRight: "1px solid #eee", minWidth: 200 }}
-    >
-      <div>
-        <strong>求人カテゴリ</strong>
-        {CATEGORIES.map((c) => (
-          <label key={c} style={{ display: "block" }}>
-            <input
-              type="checkbox"
-              checked={selected === c}
-              onChange={() => setSelected(selected === c ? "" : c)}
-            />{" "}
-            {c}
-          </label>
-        ))}
-      </div>
-      <div style={{ marginTop: 12 }}>
-        <label>
-          <strong>年収</strong>
-          <div>
-            <select value={min} onChange={(e) => setMin(e.target.value)}>
-              <option value="300">300万円以上▼</option>
-              <option value="400">400万円以上</option>
-              <option value="500">500万円以上</option>
-              <option value="600">600万円以上</option>
-              <option value="700">700万円以上</option>
-            </select>
-          </div>
-        </label>
-      </div>
-    </aside>
+    <div className="max-w-6xl h-full self-stretch">
+      <aside className="w-40 bg-gray-200 p-4 h-full">
+        <fieldset>
+          <legend className="font-semibold mb-2">求人カテゴリ</legend>
+          {CATEGORIES.map((c) => (
+            <label key={c} className="flex items-center gap-2 text-xs">
+              <input
+                type="checkbox"
+                checked={selected === c}
+                onChange={() => setSelected(selected === c ? "" : c)}
+                className="appearance-none h-3 w-3 border border-sky-300 bg-gray-100 shadow-sm rounded-none focus:outline-none focus:ring-2 focus:ring-slate-300 checked:bg-slate-700 checked:border-slate-700"
+              />{" "}
+              {c}
+            </label>
+          ))}
+        </fieldset>
+        <div>
+          <h3 className="font-semibold mb-2">年収</h3>
+          <select
+            value={min}
+            onChange={(e) => setMin(e.target.value)}
+            className="w-full border border-gray-200 rounded px-3 py-2 text-xs bg-white focus:outline-none focus:ring-2-slate-300"
+          >
+            <option value="300">300万円以上▼</option>
+            <option value="400">400万円以上</option>
+            <option value="500">500万円以上</option>
+            <option value="600">600万円以上</option>
+            <option value="700">700万円以上</option>
+          </select>
+        </div>
+      </aside>
+    </div>
   );
 }

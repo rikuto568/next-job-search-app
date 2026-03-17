@@ -38,14 +38,31 @@ export default function PostPage() {
 
   return (
     <div>
-      <h1>求人検索アプリ</h1>
-      <Link href="/">求人検索</Link>
-      <Link href="/post">求人投稿</Link>
-      <h1>求人投稿</h1>
-      <form action={handleSubmit}>
-        <label>
-          求人カテゴリ選択
-          <select name="category" required defaultValue="">
+      <header className="bg-slate-800 text-white">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <h1 className="text-lg font-semibold">求人検索アプリ</h1>
+          <nav className="items-center space-x-4">
+            <Link href="/" className="text-sm hover:underline">
+              求人検索
+            </Link>
+            <Link href="/post" className="text-sm hover:underline">
+              求人投稿
+            </Link>
+          </nav>
+        </div>
+      </header>
+      <main className="w-full px-8 my-4 rounded-lg mt- ">
+        <h2 className="text-2xl font-semibold mb-6">求人投稿</h2>
+        <form action={handleSubmit}>
+          <label className="block text-sm font-medium text-gray-700 mb-3">
+            求人カテゴリ選択
+          </label>
+          <select
+            name="category"
+            required
+            defaultValue=""
+            className="w-2/5 border border-gray-300 rounded-md  mb-3 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus-ring-sky-300 hover:bg-gray-50"
+          >
             <option value="">カテゴリを選択</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -53,17 +70,34 @@ export default function PostPage() {
               </option>
             ))}
           </select>
-        </label>
-        <label>
-          年収（万円）
-          <input type="number" name="salary" required />
-        </label>
-        <label>
-          求人タイトル
-          <input type="text" name="title" required />
-        </label>
-        <button type="submit">投稿</button>
-      </form>
+          <label className="block text-sm font-medium text-gray-700 mb-3">
+            年収（万円）
+          </label>
+          <input
+            type="number"
+            name="salary"
+            required
+            className="w-2/5 border border-gray-300 rounded-md  mb-3 px-3 py-2 text-sm focus:outline-none focus:ring-sky-300 hover:bg-gray-50"
+          />
+          <label className="block text-sm font-medium text-gray-700 mb-3">
+            求人タイトル
+          </label>
+          <input
+            type="text"
+            name="title"
+            required
+            className="w-4/5 border border-gray-300 rounded-md  mb-3 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 hover:bg-gray-50"
+          />
+          <div className="pt-6">
+            <button
+              type="submit"
+              className="w-2/5 bg-sky-600 text-white px-6 py-2 rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-300 disabled:opacity-50 transition"
+            >
+              投稿
+            </button>
+          </div>
+        </form>
+      </main>
     </div>
   );
 }
